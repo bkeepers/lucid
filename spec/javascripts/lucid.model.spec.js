@@ -16,6 +16,10 @@ describe('Lucid.Model', function() {
     expect(_.isFunction(Model.trigger)).toBe(true);
   });
 
+  it('should add aspects', function() {
+    expect(_.isFunction(Model.prototype.before)).toBe(true);
+  });
+
   it('should call the initialize method', function() {
     spyOn(Model.prototype, 'initialize');
     new Model('foo');
