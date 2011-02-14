@@ -3,24 +3,22 @@ Lucid = Lucid || {};
 
 Lucid.Aspects = {
   before: function(method, callback) {
-    var self = this,
-        original = this[method];
+    var original = this[method];
 
     this[method] = function() {
-      callback.apply(self, arguments);
-      return original.apply(self, arguments);
+      callback.apply(this, arguments);
+      return original.apply(this, arguments);
     }
 
     return this;
   },
 
   after: function(method, callback) {
-    var self = this,
-        original = this[method];
+    var original = this[method];
 
     this[method] = function() {
-      var result = original.apply(self, arguments);
-      callback.apply(self, arguments);
+      var result = original.apply(this, arguments);
+      callback.apply(this, arguments);
       return result;
     }
 
