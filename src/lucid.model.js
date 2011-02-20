@@ -1,8 +1,8 @@
 var Lucid;
 Lucid = Lucid || {};
 
-Lucid.Model = function(methods) {
-  var model = function() {
+Lucid.Model = function (methods) {
+  var model = function () {
     this.initialize.apply(this, arguments);
   };
   _.extend(model.prototype, Lucid.Events, Lucid.Aspects, Lucid.Model.Methods, methods);
@@ -11,5 +11,5 @@ Lucid.Model = function(methods) {
 };
 
 Lucid.Model.Methods = {
-  initialize: function() {}
-}
+  initialize: function () {}
+};

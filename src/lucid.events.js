@@ -2,18 +2,18 @@ var Lucid;
 Lucid = Lucid || {};
 
 Lucid.Events = {
-  bind: function(event, callback) {
-    this._events_ = this._events_ || {}
+  bind: function (event, callback) {
+    this._events_ = this._events_ || {};
     this._events_[event] = this._events_[event] || [];
     this._events_[event].push(callback);
     return this;
   },
 
-  trigger: function(name, data) {
-    this._events_ = this._events_ || {}
+  trigger: function (name, data) {
+    this._events_ = this._events_ || {};
     var events = this._events_[name] || [];
 
-    if(this.constructor._events_) {
+    if (this.constructor._events_) {
       events = events.concat(this.constructor._events_[name] || []);
     }
 
@@ -24,9 +24,9 @@ Lucid.Events = {
     return this;
   },
 
-  unbind: function(event, callback) {
-    this._events_ = this._events_ || {}
-  
+  unbind: function (event, callback) {
+    this._events_ = this._events_ || {};
+
     if (callback) {
       var events = this._events_[event] || [];
 
