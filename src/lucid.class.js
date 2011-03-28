@@ -19,7 +19,8 @@ Lucid.Class.Methods = {
   },
 
   include: function () {
-    return _.extend.apply(_, [this.prototype].concat(_.toArray(arguments)));
+    _.extend.apply(_, [this.prototype].concat(_.toArray(arguments)));
+    return this;
   }
 };
 

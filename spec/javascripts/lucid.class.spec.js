@@ -44,6 +44,10 @@ describe('Lucid.Class', function () {
         expect(Foo.prototype.a).toEqual(1);
         expect(Foo.prototype.b).toEqual(2);
       });
+
+      it('should return the class', function () {
+        expect(Foo.include({})).toEqual(Foo);
+      });
     });
 
     describe('extend', function () {
