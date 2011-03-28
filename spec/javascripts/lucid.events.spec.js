@@ -29,25 +29,30 @@ describe('Lucid.Events', function () {
       expect(object.bind('foo', function () {})).toEqual(object);
     });
 
-    describe("with instances", function () {
+    describe("on constructor prototype", function () {
       var Thing;
 
       beforeEach(function () {
         Thing = _.extend(function () {
-          this.called = false;
-        }, Lucid.Events);
+          this.called_on_prototype = false;
+        });
         _.extend(Thing.prototype, Lucid.Events);
 
-        Thing.bind('create', function () {
-          this.called = true;
+        Thing.prototype.bind('create', function () {
+          this.called_on_prototype = true;
         });
       });
 
-      it("should trigger events on constructor", function () {
+      it("should trigger events bound to prototoype and instance", function () {
         var thing = new Thing();
 
+        thing.bind('create', function () {
+          this.called_on_instance = true;
+        });
+
         thing.trigger('create');
-        expect(thing.called).toBe(true);
+        expect(thing.called_on_instance).toBe(true);
+        expect(thing.called_on_prototype).toBe(true);
       });
 
       it('should not trigger on other instances', function () {
@@ -55,8 +60,21 @@ describe('Lucid.Events', function () {
         var thing2 = new Thing();
 
         thing1.trigger('create');
-        expect(thing1.called).toBe(true);
-        expect(thing2.called).toBe(false);
+        expect(thing1.called_on_prototype).toBe(true);
+        expect(thing2.called_on_prototype).toBe(false);
+      });
+
+      it('should not trigger events bound on other instances', function () {
+        var thing1 = new Thing();
+        var thing2 = new Thing();
+
+        thing2.bind('object', function () {
+          this.bleeding = true;
+        });
+
+        thing1.trigger('object');
+        expect(thing2.bleeding).toBe(undefined);
+        expect(thing1.bleeding).toBe(undefined);
       });
     });
   });
