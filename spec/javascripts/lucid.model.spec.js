@@ -1,8 +1,13 @@
 describe('Lucid.Model', function () {
-  var Model = Lucid.Model({
-    initialize: function () {},
-    foo: function () {}
+  var Model;
+
+  beforeEach(function () {
+    Model = Lucid.Model.extend({
+      initialize: function () {},
+      foo: function () {}
+    });
   });
+
 
   it('should add methods to prototype', function () {
     expect(_.isFunction(Model.prototype.foo)).toBe(true);
@@ -10,10 +15,6 @@ describe('Lucid.Model', function () {
 
   it('should add events the prototype', function () {
     expect(_.isFunction(Model.prototype.trigger)).toBe(true);
-  });
-
-  it('should add events the constructor', function () {
-    expect(_.isFunction(Model.trigger)).toBe(true);
   });
 
   it('should add aspects', function () {
@@ -27,7 +28,7 @@ describe('Lucid.Model', function () {
   });
 
   it('should not blow up if initialize is not defined', function () {
-    var Model = Lucid.Model({});
+    var Model = Lucid.Model.extend({});
     expect(function () {
       new Model();
     }).not.toThrow();
