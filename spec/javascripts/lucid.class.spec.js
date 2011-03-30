@@ -35,6 +35,16 @@ describe('Lucid.Class', function () {
         new Foo();
       }).not.toThrow();
     });
+
+    it('should not call initialize on parent class when extending', function () {
+      Foo = Lucid.Class.extend({
+        initialize: function () {}
+      });
+
+      spyOn(Foo.prototype, 'initialize');
+      Foo.extend({});
+      expect(Foo.prototype.initialize).not.toHaveBeenCalled();
+    });
   });
 
   describe('class methods', function () {
