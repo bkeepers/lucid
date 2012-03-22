@@ -1,0 +1,12 @@
+{
+  "name": "lucid",
+  "description": "Model library",
+  "author": "Brandon Keepers <brandon@opensoul.org>",
+  "version": "0.0.1",
+  "repository": {
+    "type" : "git",
+    "url": "http://github.com/bkeepers/lucid.git"
+  },
+  "main" : "./lib/lucid",
+  "license": "MIT"
+}
