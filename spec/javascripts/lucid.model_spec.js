@@ -42,9 +42,33 @@
         return expect(this.message.date).toEqual(date);
       });
     });
-    return describe('toJSON', function() {
+    describe('toJSON', function() {
       return it('properly serializes', function() {
         return expect(JSON.stringify(this.message)).toEqual('{"text":"Hello Lucid"}');
+      });
+    });
+    return describe('attributes', function() {
+      it('includes constructor args', function() {
+        return expect(this.message.attributes()).toEqual({
+          text: 'Hello Lucid'
+        });
+      });
+      it('includes properties set explicitly', function() {
+        this.message.sender = 'brandon';
+        return expect(this.message.attributes()).toEqual({
+          text: 'Hello Lucid',
+          sender: 'brandon'
+        });
+      });
+      return it('excludes id', function() {
+        var model;
+        model = new Message({
+          id: '5',
+          text: 'hello'
+        });
+        return expect(model.attributes()).toEqual({
+          text: 'hello'
+        });
       });
     });
   });

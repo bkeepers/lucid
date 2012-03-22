@@ -21,3 +21,15 @@ describe 'Lucid.Model', ->
   describe 'toJSON', ->
     it 'properly serializes', ->
       expect(JSON.stringify(@message)).toEqual('{"text":"Hello Lucid"}')
+
+  describe 'attributes', ->
+    it 'includes constructor args', ->
+      expect(@message.attributes()).toEqual(text: 'Hello Lucid')
+
+    it 'includes properties set explicitly', ->
+      @message.sender = 'brandon'
+      expect(@message.attributes()).toEqual(text: 'Hello Lucid', sender: 'brandon')
+
+    it 'excludes id', ->
+      model = new Message(id: '5', text: 'hello')
+      expect(model.attributes()).toEqual(text: 'hello')

@@ -82,6 +82,11 @@ class Lucid.Model extends Lucid.Module
         @[key] = value
     this
 
+  attributes: ->
+    result = {}
+    result[key] = value for own key,value of @ when key != 'id'
+    result
+
 class Lucid.Repository extends Lucid.Module
   @persist: (persistence) ->
 
